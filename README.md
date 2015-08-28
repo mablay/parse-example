@@ -1,7 +1,20 @@
-# ngparse
+# parse-example
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.12.1.
+This project shows 
+
+1. Parse.com user authentication.
+2. Parse.com row level ACL.
+3. Parse.com belongs-to relation.
+4. ui-router layouting
+5. ui-router state security
+
+## Quick Install & run
+
+    git clone git@github.com:pisquared/parse-example.git
+    cd parse-example
+    npm install
+    bower install
+    grunt serve
 
 ## Build & development
 
