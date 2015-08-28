@@ -19,7 +19,7 @@ body {
 
 /* Custom page header */
 .header {
-  border-bottom: 1px solid #e5e5e5;
+/*  border-bottom: 1px solid #e5e5e5; */
   margin-bottom: 10px;
 }
 /* Make the masthead heading the same height as the navigation */
@@ -80,4 +80,33 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
+}
+
+@media screen and (min-width: 1220px) {
+  .container {
+    max-width: 1200px;
+  }
+}
+
+/** layout styles **/
+body.public {
+  background-color: lightgrey;
+}
+
+body.private {
+  background-color: white;
+}
+
+/** github badge **/
+.github-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+}
+
+.login-container {
+  margin:auto;
+  margin-top: 100px;
+  max-width: 400px;
 }

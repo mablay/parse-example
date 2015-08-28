@@ -1,0 +1,35 @@
+<div class="login-container">
+
+  <h2>Parse.com example</h2>
+
+  <div class="view-login">
+    <!-- Username -->
+    <div class="form-group">
+      <input  type="text"
+              class="form-control"
+              ng-model="username"
+              placeholder="username"/>
+    </div>
+    <!-- Password -->
+    <div class="form-group">
+      <input  type="password"
+              class="form-control"
+              ng-enter="login()"
+              ng-model="password"
+              placeholder="password"/>
+    </div>
+
+    <!-- UI Actions -->
+    <div class="col col-xs-6">
+      <a ui-sref="public.signup">Sign Up</a>
+    </div>
+    <div class="col col-xs-6 text-right">
+      <div class="form-group">
+        <div class="btn btn-primary"
+             ng-click="login()">
+          Login
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

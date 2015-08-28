@@ -8,6 +8,6 @@
  * Controller of the ngparseApp
  */
 angular.module('ngparseApp')
-.controller('MainCtrl', function () {
+.controller('MainController', function () {
 
 });

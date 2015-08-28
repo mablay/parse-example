@@ -1,32 +1,28 @@
 angular.module('ngparseApp').controller('ActivityController', function($scope, $filter){
 
-	console.debug('INIT ActivityController');
-
-
-
+	console.debug('[ACTIVITY] INIT');
 	$scope.labels = [];
 	$scope.series = ['Duration'];
 	$scope.data = [[]];
-
-
 	$scope.user = Parse.User.current();
 
 
 	$scope.query = function() {
-		console.debug('query...');
+		console.debug('[ACTIVITY] query...');
 
 		// Queries
 		var query = new Parse.Query("Activity");
 		query.find().then(function(result) {
-			console.debug('[Activity] %o', result);
-		    $scope.activities = result;
-		    $scope.updateChartData();
-		    $scope.$apply();
+			console.debug('[ACTIVITY] %o', result);
+      $scope.activities = result;
+      //$scope.updateChartData();
+      $scope.$apply();
 		});
 	}
 
 
 	// You might want to invoke $scope.$apply() afterwards
+  /*
 	$scope.updateChartData = function() {
 		$scope.labels = [];
 		$scope.data[0] = [];
@@ -37,27 +33,38 @@ angular.module('ngparseApp').controller('ActivityController', function($scope, $
 			$scope.data[0][i] = $scope.activities[i].get('schema').duration;
 		};
 	};
+	*/
 
+
+  /** UI ACTIONS **/
 	$scope.onClick = function (points, evt) {
 		console.log(points, evt);
 	};
 
+  $scope.addActivity = function() {
+    if (!$scope.newActivity || !$scope.newActivity.name)
+    console.debug('[ACTIVITY] Add %o', $scope.newActivity);
+    $scope.createRecord();
+    $scope.query();
+    $scope.newActivity.name = "";
+  };
+
+  $scope.selectActivity = function(activity) {
+    console.debug('[ACTIVITY] Select %o', activity);
+    $scope.activity = activity;
+  };
+
+
 	$scope.createRecord = function() {
 		console.debug('[SAVE] User %o => record %o', Parse.User.current(), $scope.record);
 
-		$scope.record.foo = true;
-		var user = $scope.user;
-
-		// Make a new post
-		var Activity = Parse.Object.extend("Activity");
-		var activity = new Activity();
-		activity.set("schema", $scope.record);
-		activity.set("owner", user);
-		activity.save(null, {
-		  success: function(activity) {
-		  	console.debug('[SAVE] Server response: %o', activity);
-		  }
-		});
+    var Activity = Parse.Object.extend("Activity");
+    var activity = new Activity();
+    activity.set("name", $scope.newActivity.name);
+    activity.setACL(new Parse.ACL(Parse.User.current()));
+    activity.save().then(function(result){
+      console.debug('[ACTIVITY] Save action returned: %o', result);
+    });
 
 	};
 
