@@ -8,6 +8,6 @@
  * Controller of the ngparseApp
  */
 angular.module('ngparseApp')
-.controller('MainController', function () {
-
+.controller('MainController', function ($scope) {
+  $scope.items = [];
 });

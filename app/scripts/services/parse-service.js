@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('ngparseApp').factory('parse', function() {
 	var appId = "";
 	var jsKey = "";

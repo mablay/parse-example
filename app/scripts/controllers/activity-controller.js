@@ -1,4 +1,6 @@
-angular.module('ngparseApp').controller('ActivityController', function($scope, $filter){
+'use strict';
+
+angular.module('ngparseApp').controller('ActivityController', function($scope){
 
 	console.debug('[ACTIVITY] INIT');
 	$scope.labels = [];
@@ -18,7 +20,7 @@ angular.module('ngparseApp').controller('ActivityController', function($scope, $
       //$scope.updateChartData();
       $scope.$apply();
 		});
-	}
+	};
 
 
 	// You might want to invoke $scope.$apply() afterwards
@@ -42,7 +44,10 @@ angular.module('ngparseApp').controller('ActivityController', function($scope, $
 	};
 
   $scope.addActivity = function() {
-    if (!$scope.newActivity || !$scope.newActivity.name)
+    if (!$scope.newActivity || !$scope.newActivity.name) {
+      console.warn('[ACTIVITY] Enter a name');
+      return;
+    }
     console.debug('[ACTIVITY] Add %o', $scope.newActivity);
     $scope.createRecord();
     $scope.query();

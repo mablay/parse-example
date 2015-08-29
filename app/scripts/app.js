@@ -43,14 +43,14 @@ angular
         views: {
           "": {
             templateUrl: "views/layout-private.html",
-            controller: function($rootScope, $state) {
+            controller: function($rootScope) {
               //console.debug('private');
               $rootScope.bodyClass="private";
             }
           },
           "nav@private": {
             templateUrl: 'views/nav.html',
-            controller: function($scope) {
+            controller: function() {
               //console.debug('nav');
             }
           }
@@ -111,11 +111,12 @@ angular
       }
     });
 
-    $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
-      if (from.name)
+    $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from) {
+      if (from.name) {
         $rootScope.previousState = from.name;
-      else
+      } else {
         $rootScope.previousState = 'public.login';
+      }
     });
 
   });
