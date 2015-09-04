@@ -17,18 +17,73 @@
 
     <ul class="list-group">
       <li ng-repeat="activity in activities"
-          class="list-group-item"
-          ng-click="selectActivity(activity)"
-          ng-bind="activity.get('name')"></li>
+          class="list-group-item">
+        <div class="row">
+          <div class="col col-xs-8"
+               ui-sref="private.records({activityId:activity.id})">
+            <h4 ng-bind="activity.get('name')"></h4>
+          </div>
+          <div class="col col-xs-4 text-right">
+            <div class="btn btn-primary"
+                 ng-click="selectActivity(activity)">Edit</div>
+          </div>
+        </div>
+      </li>
     </ul>
 
 
   </div>
 
   <div class="col col-md-8">
-    <h4>Schema</h4>
+    <h3>Schema</h3>
 
+    <div ng-controller="SchemaController">
+
+      <!-- NEW FIELD -->
+      <h4>New Field</h4>
+      <form class="form-inline">
+
+        <!-- SELECT -->
+        <select class="form-control"
+                ng-model="newField.type">
+          <option ng-repeat="option in fieldTypeOptions"
+                  value="{{option.value}}"
+                  ng-selected="option.value == newField.type"
+                  ng-bind="option.name"></option>
+        </select>
+
+        <!-- TEXT -->
+        <div class="form-group">
+          <input type="text"
+                 class="form-control"
+                 ng-model="newField.name"
+                 placeholder="Field name">
+        </div>
+
+        <!-- Add BUTTON -->
+        <div ng-click="addField(newField)" class="btn btn-primary">
+          <span class="glyphicon glyphicon-plus"></span>
+        </div>
+      </form>
+      <!-- /NEW FIELD -->
+
+      <h4>Fields</h4>
+      <form id="dynForm" sf-schema="schema" sf-model="schemaModel"></form>
+
+      <div class="btn btn-primary"
+           ng-click="saveSchema()">Save</div>
+
+        <!--
+        <h4>Schema (debug)</h4>
+        <pre ng-bind="schema|json"></pre>
+        -->
+
+      </div><!-- /SchemaController -->
+
+    <!--
+    <h4>Activity (debug)</h4>
     <pre ng-bind="activity|json"></pre>
+    -->
 
   </div>
 

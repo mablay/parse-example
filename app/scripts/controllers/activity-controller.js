@@ -57,6 +57,8 @@ angular.module('ngparseApp').controller('ActivityController', function($scope){
   $scope.selectActivity = function(activity) {
     console.debug('[ACTIVITY] Select %o', activity);
     $scope.activity = activity;
+    $('#dynForm').empty();  // This is a workaround, since angular-schema-form does not redraw empty forms in 0.8.5
+    $scope.$broadcast('ActivityChanged', activity);
   };
 
 
@@ -72,6 +74,15 @@ angular.module('ngparseApp').controller('ActivityController', function($scope){
     });
 
 	};
+
+  $scope.saveSchema = function(schema) {
+    if (!$scope.activity) {
+      return console.warn('Save failed! Select an activity first.');
+    }
+    console.debug('[ACTIVITY] Save activity %s.schema => %o', $scope.activity.get('name'), schema);
+    $scope.activity.set('schema', schema);
+    $scope.activity.save();
+  };
 
 
 });

@@ -16,7 +16,8 @@ angular
     'ui.router',
     'ngSanitize',
     'ngTouch',
-    'chart.js'
+    'chart.js',
+    'schemaForm'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
 
@@ -89,11 +90,17 @@ angular
         controller: 'ActivityController'
       })
       .state('private.records', {
-        url: "/records",
+        url: "/activities/:activityId/records",
         templateUrl: "views/records.html",
-        controller: function($scope) {
-          console.debug('private.records');
-          $scope.items = ["A", "List", "Of", "Items"];
+        controller: function($scope, $stateParams) {
+          console.debug('[RECORDS] private.records %o', $stateParams);
+          var Activity = Parse.Object.extend('Activity');
+          var query = new Parse.Query(Activity);
+          query.get($stateParams.activityId).then(function(result){
+            $scope.activity = result;
+            console.debug('[RECORDS] Activity resolved %o', result);
+            $scope.$apply();
+          });
         }
       });
 
