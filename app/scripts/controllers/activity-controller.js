@@ -57,7 +57,11 @@ angular.module('ngparseApp').controller('ActivityController', function($scope){
   $scope.selectActivity = function(activity) {
     console.debug('[ACTIVITY] Select %o', activity);
     $scope.activity = activity;
-    $('#dynForm').empty();  // This is a workaround, since angular-schema-form does not redraw empty forms in 0.8.5
+    if (activity.attributes.schema && $.isEmptyObject(activity.attributes.schema.properties)) {
+      // This is a workaround, since angular-schema-form does not redraw empty forms in 0.8.5
+      console.warn('TODO: Workaround deactivated, fix that!');
+      //$('#dynForm').empty();
+    }
     $scope.$broadcast('ActivityChanged', activity);
   };
 
