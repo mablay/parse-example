@@ -66,18 +66,6 @@ angular.module('ngparseApp').controller('ActivityController', function($scope){
   };
 
 
-	$scope.createRecord = function() {
-		console.debug('[SAVE] User %o => record %o', Parse.User.current(), $scope.record);
-
-    var Activity = Parse.Object.extend("Activity");
-    var activity = new Activity();
-    activity.set("name", $scope.newActivity.name);
-    activity.setACL(new Parse.ACL(Parse.User.current()));
-    activity.save().then(function(result){
-      console.debug('[ACTIVITY] Save action returned: %o', result);
-    });
-
-	};
 
   $scope.saveSchema = function(schema) {
     if (!$scope.activity) {

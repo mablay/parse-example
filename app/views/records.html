@@ -1,19 +1,12 @@
-<div>
-  <h3>Records for <span ng-bind="activity.get('name')"></span></h3>
-  <!-- QUERY -->
-  <div class="list-records">
-
-    <!-- Refresh Button -->
-    <div class="btn btn-primary" ng-click="query()">
-      <span class="glyphicon glyphicon-refresh"></span>
-    </div>
-
-  </div>
+<div class="records-view">
+  <h3>Records for 
+    <span class="text-info" ng-bind="activity.get('name')"></span>
+  </h3>
 
   <div class="activity-schema">
 
 
-    <h4>History</h4>
+    <h4>History Chart</h4>
     <canvas
       id="line"
       class="chart chart-line"
@@ -26,28 +19,21 @@
     </canvas>
 
 
-    <h4>Create new record</h4>
     <!-- CREATE -->
-    <div class="record-form form-inline">
-      <div class="form-group">
-        <input  type="text"
-                class="form-control"
-                ng-model="record.bar"
-                placeholder="title"/>
-      </div>
-      <div class="form-group">
-        <input  type="number"
-                class="form-control"
-                ng-model="record.duration"
-                placeholder="duration"/>
-      </div>
-      <div class="form-group">
-        <div class="btn btn-primary"
-             ng-click="createRecord()">
-          Submit
-        </div>
-      </div>
-    </div><br/><br/>
+    <h4>Create new record</h4>
+    <form  id="newRecordFormElement"
+          sf-schema="activity.attributes.schema" 
+          sf-model="newRecord"
+          sf-form="newRecordForm"
+          ng-submit="submitRecord(newRecordFormElement)">
+    </form>
+    <!--
+    <div ng-repeat="(name, property) in activity.attributes.schema.properties">
+    </div>
+    -->
+
+    <pre ng-bind="activity.attributes.schema.properties|json"></pre>
+    <br/><br/>
     <!-- /CREATE -->
 
 
@@ -57,27 +43,27 @@
     <h4>Log</h4>
     <strong> <!-- Log header -->
       <div class="row">
-        <div class="col col-xs-4 text-bold">Foo</div>
-        <div class="col col-xs-4">Time</div>
-        <div class="col col-xs-4">Duration</div>
+        <div class="col col-xs-4 text-bold">id</div>
+        <div class="col col-xs-4">Activity</div>
+        <div class="col col-xs-4">Value</div>
       </div>
     </strong>
     <!-- Log Body -->
-    <div ng-repeat="activity in activities"
-         class="card-activity row">
+    <div ng-repeat="record in records"
+         class="card-record row">
       <div class="col col-xs-4"
-           ng-bind="activity.get('schema').bar"></div>
+           ng-bind="record.id"></div>
       <div class="col col-xs-4"
-           ng-bind="activity.createdAt|date:'HH:mm:ss'"></div>
+           ng-bind="record.get('activity').id"></div>
       <div class="col col-xs-4"
-           ng-bind="activity.get('schema').duration"></div>
+           ng-bind="record.get('data').Repetitions"></div>
     </div>
 
     <br/><br/>
 
     <h4>Debug</h4>
     <pre ng-bind="user|json"></pre>
-    <pre ng-bind="activities|json"></pre>
+    <pre ng-bind="records|json"></pre>
 
   </div>
   <!-- /QUERY -->
