@@ -32,9 +32,10 @@
     </div>
     -->
 
+    <!--
     <pre ng-bind="activity.attributes.schema.properties|json"></pre>
     <br/><br/>
-    <!-- /CREATE -->
+     /CREATE -->
 
 
 
@@ -44,8 +45,7 @@
     <strong> <!-- Log header -->
       <div class="row">
         <div class="col col-xs-4 text-bold">id</div>
-        <div class="col col-xs-4">Activity</div>
-        <div class="col col-xs-4">Value</div>
+        <div class="col col-xs-4" ng-bind="primaryProperty"></div>
       </div>
     </strong>
     <!-- Log Body -->
@@ -54,17 +54,16 @@
       <div class="col col-xs-4"
            ng-bind="record.id"></div>
       <div class="col col-xs-4"
-           ng-bind="record.get('activity').id"></div>
-      <div class="col col-xs-4"
-           ng-bind="record.get('data').Repetitions"></div>
+           ng-bind="record.get('data')[primaryProperty]"></div>
     </div>
 
     <br/><br/>
 
+    <!--
     <h4>Debug</h4>
     <pre ng-bind="user|json"></pre>
     <pre ng-bind="records|json"></pre>
-
+    -->
   </div>
   <!-- /QUERY -->
 

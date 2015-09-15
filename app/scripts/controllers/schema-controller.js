@@ -67,7 +67,7 @@ angular.module('ngparseApp').controller('SchemaController', function($scope){
   /** new field - onClick handler **/
   $scope.addField = function(field) {
     console.debug('[SCHEMA] Add field %o', field);
-    var newField = $.extend({}, $scope.defaultFieldSchema[field.type])
+    var newField = $.extend({}, $scope.defaultFieldSchema[field.type]);
     newField.description = "";
     $scope.schema.properties[field.name] = newField;
     console.debug('new schema: %O', $scope.schema);

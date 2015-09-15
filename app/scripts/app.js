@@ -26,6 +26,9 @@ angular
     Parse.initialize(appId, jsKey);
 
 
+    Chart.defaults.global.scaleBeginAtZero = true;
+
+
     $urlRouterProvider.otherwise("/activities");
 
     $stateProvider

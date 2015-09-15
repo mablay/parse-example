@@ -12,6 +12,8 @@
   "unused": true,
   "globals": {
     "angular": false,
-    "Parse": false
+    "Parse": false,
+    "$": false,
+    "Chart": false
   }
 }
